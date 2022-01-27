@@ -1,0 +1,31 @@
+
+<h3 class="text-center fs-1">Edit Task</h3>
+<div class="" *ngIf="loading">
+    <app-loading></app-loading>
+</div>
+<div class="container">
+    <form *ngIf="!loading">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Tên công việc</label>
+          <input value={{taskEdit.taskName}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Mô tả công việc</label>
+          <input value={{taskEdit.taskName}} type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+          <select class="form-select" aria-label="Default select example">
+            <option selected disabled>Project</option>
+            <option value="1">Project1</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <app-date-range-picker-overview-example></app-date-range-picker-overview-example>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Team Size</label>
+            <input value={{taskEdit.teamSize}} type="number" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Edit Task</button>
+      </form>
+</div>

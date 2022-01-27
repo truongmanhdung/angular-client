@@ -1,0 +1,28 @@
+
+<h3 class="text-center fs-1">Create Task</h3>
+<div class="container">
+    <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Tên công việc</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Mô tả công việc</label>
+          <input type="text" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+          <select class="form-select" aria-label="Default select example">
+            <option selected disabled>Project</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <app-date-range-picker-overview-example></app-date-range-picker-overview-example>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Team Size</label>
+            <input type="number" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Task</button>
+      </form>
+</div>
