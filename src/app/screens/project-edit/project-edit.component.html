@@ -1,0 +1,35 @@
+<h3>Tạo dự án</h3>
+<div class="container">
+    <form #project="ngForm" (ngSubmit)="submitAddProjectForm(project)" novalidate>
+        <div class="col-6 offset-3">
+            <div class="form-group mt-3">
+                <label for="">Tên dự án</label>
+                <input type="text" ngModel name="projectName" class="form-control" #projectName="ngModel" >
+                <span class="text-danger" *ngIf="projectName?.invalid && (projectName?.dirty || projectName?.touched)">Tên không hợp lệ</span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Ngày bắt đầu</label>
+                <input type="date" name="startDate" ngModel class="form-control" #startDate="ngModel" >
+                <span class="text-danger" *ngIf="startDate?.invalid">Bạn phải nhập ngày bắt đầu</span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Ngày kết thúc</label>
+                <input type="date" name="endDate" ngModel class="form-control" #endDate="ngModel" >
+                <span class="text-danger" *ngIf="endDate?.invalid">Bạn phải nhập ngày kết thúc</span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Project Money</label>
+                <input type="number" name="project_money" ngModel class="form-control" #project_money="ngModel" >
+                <span class="text-danger" *ngIf="project_money?.invalid">Bạn phải nhập số lượng thành viên</span>
+            </div>
+            <div class="form-group mt-3">
+                <label for="">Số thành viên</label>
+                <input type="number" name="teamSize" ngModel class="form-control" #teamSize="ngModel" >
+                <span class="text-danger" *ngIf="teamSize?.invalid">Bạn phải nhập số lượng thành viên</span>
+            </div>
+            <div class="d-flex justify-content-end mt-3"> 
+                <button [disabled]="project.invalid" type="submit" class="btn btn-primary">Tạo</button>
+            </div>
+        </div>
+    </form>
+</div>

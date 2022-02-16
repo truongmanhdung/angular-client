@@ -16,6 +16,14 @@ import { DateRangePickerOverviewExampleComponent } from './components/date-range
 import {MatNativeDateModule} from '@angular/material/core';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ProfileEmailComponent } from './components/profile-email/profile-email.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guard/auth.guard';
+import { ProjectListComponent } from './screens/project-list/project-list.component';
+import { ProjectAddComponent } from './screens/project-add/project-add.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UserListComponent } from './screens/user-list/user-list.component';
+import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,15 +38,25 @@ import { ProfileEmailComponent } from './components/profile-email/profile-email.
     DateRangePickerOverviewExampleComponent,
     LoadingComponent,
     ProfileEmailComponent,
+    ProjectListComponent,
+    ProjectAddComponent,
+    UserListComponent,
+    ProjectEditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
