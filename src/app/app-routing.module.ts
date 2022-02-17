@@ -9,6 +9,7 @@ import { ListtaskComponent } from './screens/listtask/listtask.component';
 import { LoginComponent } from './screens/login/login.component';
 import { ProfileComponent } from './screens/profile/profile.component';
 import { ProjectAddComponent } from './screens/project-add/project-add.component';
+import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
 import { ProjectListComponent } from './screens/project-list/project-list.component';
 import { UserListComponent } from './screens/user-list/user-list.component';
 
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'du-an',
     component: ProjectListComponent,
+  },
+  {
+    path: 'du-an/edit/:id',
+    component: ProjectEditComponent,
   },
   {
     path: 'du-an/them-moi',

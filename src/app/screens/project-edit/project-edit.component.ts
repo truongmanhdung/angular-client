@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectApiService } from 'src/app/services/project-api.service';
 
 @Component({
@@ -10,17 +10,27 @@ import { ProjectApiService } from 'src/app/services/project-api.service';
 })
 export class ProjectEditComponent implements OnInit {
 
-  constructor(private ProjectApiService: ProjectApiService, private router: Router) { }
-
+  constructor(private ProjectApiService: ProjectApiService, private route: ActivatedRoute, private router: Router) { }
+  projectEdit:any = {};
   ngOnInit(): void {
+    let that = this
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.ProjectApiService.getOneProject(id).subscribe((data) => {
+        this.projectEdit =  data.project
+      })
+    }
+    
+    
   }
   
   submitAddProjectForm(f: NgForm) {
+   
     f.value.teamSize = +f.value.teamSize;
     f.value.project_money = +f.value.project_money
     console.log(f.value);
     
-    this.ProjectApiService.postProject(f.value).subscribe((data) => {
+    this.ProjectApiService.putProject( this.projectEdit._id ,f.value).subscribe((data) => {
       if(data.success){
         this.router.navigate(['du-an'])
       }

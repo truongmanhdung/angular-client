@@ -13,20 +13,28 @@ export class ProjectListComponent implements OnInit {
 
   projects: IPROJECT[] = []
   constructor(private ProjectApiService: ProjectApiService) { }
-
+  loading = true;
   apiUrl = "http://localhost:8080/api/projects"
   apiDelete = "http://localhost:8080/api/project"
   ngOnInit(): void {
+    let that = this
     this.ProjectApiService.getProject().subscribe((data) => {
       console.log(data);
       this.projects = data.Projects
+      setTimeout(() => {
+        that.loading = false
+      }, 1000);
     })
   }
 
   remove(id: any) {
     if(window.confirm("Bạn có muốn xóa không")){
+      let that = this
       this.ProjectApiService.deleteProject(id).subscribe((data) => {
         console.log(data);
+        setTimeout(() => {
+          that.loading = false
+        }, 1000);
       })
       this.projects = this.projects.filter((item) => item._id !== id)
     }
