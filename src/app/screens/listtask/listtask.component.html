@@ -11,20 +11,33 @@
   <thead>
     <tr>
       <th class="text-center">STT</th>
-      <th class="text-center">Name</th>
-      <th class="text-center">Date of Start</th>
-      <th class="text-center">Team Size</th>
+      <th class="text-center">Tên cv</th>
+      <th class="text-center">Mô tả</th>
+      <th class="text-center">Ngày bắt đầu</th>
+      <th class="text-center">Tên Project</th>
+      <th class="text-center">Người thực hiện</th>
       <th class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listTask">
-      <td class="text-center">{{ item.id }}</td>
-      <td class="text-center">{{ item.taskName }}</td>
-      <td class="text-center">{{ item.date }}</td>
-      <td class="text-center">{{ item.teamSize }}</td>
+    <tr *ngFor="let item of listTask; let i = index">
+      <td class="text-center">{{ i + 1 }}</td>
+      <td class="text-center">{{ item.nameTask }}</td>
+      <td class="text-center">{{ item.desc }}</td>
+      <td class="text-center">{{ item.timeStart | date: "d/M/y" }}</td>
+      <td class="text-center">{{ item.projectId.projectName }}</td>
+      <td class="text-center d-flex align-items-center justify-content-center">
+        <img
+          width="50"
+          height="50"
+          class="rounded-circle"
+          [src]="item.watcher[0].userId.avatar"
+          alt=""
+        />
+        <p class="m-0 ms-2">{{ item.watcher[0].userId.name }}</p>
+      </td>
       <td class="text-center">
-        <a [routerLink]="['/edit-task', item.id ]"
+        <a [routerLink]="['/edit-task', item._id]"
           ><button type="button" class="btn btn-outline-primary">Sửa</button></a
         >
         <button type="button" class="btn btn-outline-danger ms-2">Xóa</button>

@@ -14,10 +14,6 @@ export class TaskApiService {
     return this.http.get<any>(`${environment.taskApiUrl}${searchParams}`);
   }
 
-  getTaskOfProject(searchParams: String = ''): Observable<any> {
-    return this.http.get<any>(`${environment.taskApiUrl}${searchParams}`);
-  }
-
 
   getOneTask(id: String): Observable<any> {
     return this.http.get<any>(`${environment.taskApiUrl}${id}`);

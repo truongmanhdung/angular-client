@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TASK, listtask } from '../../module/task';
+import { TASK } from '../../module/task';
 @Component({
   selector: 'app-taskedit',
   templateUrl: './taskedit.component.html',
@@ -14,22 +14,14 @@ export class TaskeditComponent implements OnInit {
     
   }
   loading = true;
-  taskEdit:TASK = {
-    id: 0,
-    taskName: '',
-    date: '',
-    teamSize: 0
-  };
+
 
   ngOnInit(): void {
     let that = this;
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    const task = listtask.find((task: TASK) => task.id = id);
+   
     setTimeout(() => {
-      if(task){
-        that.taskEdit = task;
-        that.loading = false
-      }
+      
     }, 3000)
     
   }

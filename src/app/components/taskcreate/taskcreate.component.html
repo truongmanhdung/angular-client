@@ -1,31 +1,76 @@
-
 <div class="container">
   <h3 class="my-3 text-center">Tạo dự án</h3>
   <form #project="ngForm" (ngSubmit)="submitAddTaskForm(project)" novalidate>
-      <div class="col-6 offset-3">
-          <div class="form-group mt-3">
-              <label for="">Tên công việc</label>
-              <input type="text" ngModel name="taskName" class="form-control" #taskName="ngModel" >
-              <span class="text-danger" *ngIf="taskName?.invalid && (taskName?.dirty || taskName?.touched)">Tên không hợp lệ</span>
-          </div>
-          <div class="form-group mt-3">
-              <label for="">Ngày bắt đầu</label>
-              <input type="date" name="startDate" ngModel class="form-control" #startDate="ngModel" >
-              <span class="text-danger" *ngIf="startDate?.invalid">Bạn phải nhập ngày bắt đầu</span>
-          </div>
-          <div class="form-group mt-3">
-              <label for="">Project Money</label>
-              <input type="number" name="project_money" ngModel class="form-control" #project_money="ngModel" >
-              <span class="text-danger" *ngIf="project_money?.invalid">Bạn phải nhập số lượng thành viên</span>
-          </div>
-          <div class="form-group mt-3">
-              <label for="">Số thành viên</label>
-              <input type="number" name="teamSize" ngModel class="form-control" #teamSize="ngModel" >
-              <span class="text-danger" *ngIf="teamSize?.invalid">Bạn phải nhập số lượng thành viên</span>
-          </div>
-          <div class="d-flex justify-content-end mt-3"> 
-              <button [disabled]="project.invalid" type="submit" class="btn btn-primary">Tạo</button>
-          </div>
+    <div class="col-6 offset-3">
+      <div class="form-group mt-3">
+        <label for="">Tên công việc</label>
+        <input
+          type="text"
+          ngModel
+          name="nameTask"
+          class="form-control"
+          #nameTask="ngModel"
+        />
+        <span
+          class="text-danger"
+          *ngIf="nameTask?.invalid && (nameTask?.dirty || nameTask?.touched)"
+          >Tên không hợp lệ</span
+        >
       </div>
+      <div class="form-group mt-3">
+        <label for="">Mô tả công việc</label>
+        <input
+          type="text"
+          ngModel
+          name="desc"
+          class="form-control"
+          #desc="ngModel"
+        />
+        <span class="text-danger" *ngIf="desc?.invalid"
+          >Bạn phải nhập mô tả công việc</span
+        >
+      </div>
+      <div class="form-group mt-3">
+        <label for="">Ngày bắt đầu</label>
+        <input
+          type="date"
+          name="startDate"
+          ngModel
+          class="form-control"
+          #startDate="ngModel"
+        />
+        <span class="text-danger" *ngIf="startDate?.invalid"
+          >Bạn phải nhập ngày bắt đầu</span
+        >
+      </div>
+      <div class="form-group mt-3">
+        <label for="">Người thực hiện</label>
+        <div class="mb-3">
+          <select class="form-select" name="assignee" ngModel #assignee="ngModel">
+            <option selected *ngFor="let u of listUser" [value]="u._id">{{u.name}} - {{u.email}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group mt-3">
+        <label for="">Người theo dõi</label>
+      </div>
+      <div class="form-group mt-3">
+        <label for="">Project</label>
+        <div class="mb-3">
+          <select  class="form-select" name="projectId" ngModel #projectId="ngModel">
+            <option selected *ngFor="let p of listProject" [value]="p._id">{{p.projectName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+        <button
+          [disabled]="project.invalid"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Tạo
+        </button>
+      </div>
+    </div>
   </form>
 </div>
