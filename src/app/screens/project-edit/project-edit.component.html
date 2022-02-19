@@ -14,11 +14,6 @@
                 <span class="text-danger" *ngIf="startDate?.invalid">Bạn phải nhập ngày bắt đầu</span>
             </div>
             <div class="form-group mt-3">
-                <label for="">Ngày kết thúc</label>
-                <input value={{projectEdit.endDate}} type="date" name="endDate" ngModel class="form-control" #endDate="ngModel" >
-                <span class="text-danger" *ngIf="endDate?.invalid">Bạn phải nhập ngày kết thúc</span>
-            </div>
-            <div class="form-group mt-3">
                 <label for="">Project Money</label>
                 <input value={{projectEdit.project_money}} type="number" name="project_money" ngModel class="form-control" #project_money="ngModel" >
                 <span class="text-danger" *ngIf="project_money?.invalid">Bạn phải nhập số lượng thành viên</span>

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   userApiUrl: 'http://localhost:8080/api/users/',
   projectApiUrl: 'http://localhost:8080/api/project/',
+  taskApiUrl: 'http://localhost:8080/api/task/',
 };
 
 /*

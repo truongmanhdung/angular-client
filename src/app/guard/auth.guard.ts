@@ -12,11 +12,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean|UrlTree{
       let isAuth = this.authService.isAuthenticated();
-      console.log(isAuth);
+     
       if(isAuth){
+        this.router.navigate(['/dash-board']);
         return true;
       }else{
         this.router.navigate(['/login']);
+         console.log(isAuth);
         return false;
       }
             

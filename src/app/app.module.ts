@@ -24,6 +24,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './screens/user-list/user-list.component';
 import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
+import { ProjectListDetailComponent } from './screens/project-list-detail/project-list-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ProjectEditComponent } from './screens/project-edit/project-edit.compon
     ProjectAddComponent,
     UserListComponent,
     ProjectEditComponent,
+    ProjectListDetailComponent,
   ],
   imports: [
     BrowserModule,

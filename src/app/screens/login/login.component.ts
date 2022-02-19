@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
       if(res.token){
         localStorage.setItem('token', res.token)
         this.router.navigate(['/dash-board'])
+      }else{
+        this.router.navigate(['/login'])
       }
     })
   }

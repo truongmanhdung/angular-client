@@ -28,7 +28,22 @@ export class ProjectEditComponent implements OnInit {
    
     f.value.teamSize = +f.value.teamSize;
     f.value.project_money = +f.value.project_money
-    console.log(f.value);
+    if(f.value.projectName === ""){
+      f.value.projectName = this.projectEdit.projectName
+    }
+
+    if(f.value.startDate === ""){
+      f.value.startDate = this.projectEdit.startDate
+    }
+
+    if(f.value.teamSize === 0){
+      f.value.teamSize = this.projectEdit.teamSize
+    }
+
+    if(f.value.project_money === 0){
+      f.value.project_money = this.projectEdit.project_money
+    }
+
     
     this.ProjectApiService.putProject( this.projectEdit._id ,f.value).subscribe((data) => {
       if(data.success){

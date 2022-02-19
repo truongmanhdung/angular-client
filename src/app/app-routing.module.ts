@@ -17,17 +17,17 @@ import { UserListComponent } from './screens/user-list/user-list.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: "login",
-    pathMatch: "full"
+    redirectTo: '/dash-board',
+    pathMatch: 'full'
   },
   {
     path: 'dash-board',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'list-task',
