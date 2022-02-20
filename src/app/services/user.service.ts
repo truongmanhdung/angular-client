@@ -20,4 +20,8 @@ export class UserService {
     return this.http.delete<any>(`${environment.userApiUrl}${id}`)
   }
 
+  updateUser(id: String, data: any): Observable<any>{
+    return this.http.put<any>(`${environment.uApiUrl}${id}`, data)
+  }
+
 }

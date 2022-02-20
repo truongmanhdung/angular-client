@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,17 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private UserService: UserService) { }
 
-  user = {
-    fullname: 'Trương Mạnh Dũng',
-    name: 'Dũng',
-    avatar: 'https://scontent.fhan2-2.fna.fbcdn.net/v/t1.6435-9/119041444_307503740550551_8009155939658957269_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=zQLN47VRqDEAX9U_U5e&tn=cwiumohlbfIyPqcu&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8RsT89WvxOi5KzvL9ydMsPxlpRFwtWVhcYklkOK8v-Hw&oe=6217A596',
-    email: 'dungtmph12934@fpt.edu.vn',
-    gioitinh: 'male'
+  user: any = {};
+  ngOnInit(): void {
+    if(localStorage.getItem('user') !== undefined && localStorage.getItem('user')){
+      const userLocal:any = localStorage.getItem('user')
+      this.user = JSON.parse(userLocal)
+    }else{
+      this.router.navigate(['/login'])
+    }
   }
 
-  ngOnInit(): void {
+  submitProfileForm(f: NgForm){
+      this.UserService.updateUser(this.user._id, f.value).subscribe((data) => {
+        localStorage.setItem('user', JSON.stringify(data.user))
+      })
   }
 
 }

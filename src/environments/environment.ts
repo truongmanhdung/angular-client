@@ -5,8 +5,13 @@
 export const environment = {
   production: false,
   userApiUrl: 'http://localhost:8080/api/users',
+  uApiUrl: 'http://localhost:8080/api/user/',
   projectApiUrl: 'http://localhost:8080/api/project/',
   taskApiUrl: 'http://localhost:8080/api/task/',
+  loginApiUrl: 'http://localhost:8080/api/signin',
+  registerApiUrl: 'http://localhost:8080/api/signup',
+  logoutApiUrl: 'http://localhost:8080/api/signout',
+  
 };
 
 /*

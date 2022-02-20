@@ -16,7 +16,7 @@ import { DateRangePickerOverviewExampleComponent } from './components/date-range
 import {MatNativeDateModule} from '@angular/material/core';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ProfileEmailComponent } from './components/profile-email/profile-email.component';
-import { AuthService } from './services/auth.service';
+
 import { AuthGuard } from './guard/auth.guard';
 import { ProjectListComponent } from './screens/project-list/project-list.component';
 import { ProjectAddComponent } from './screens/project-add/project-add.component';
@@ -25,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './screens/user-list/user-list.component';
 import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
 import { ProjectListDetailComponent } from './screens/project-list-detail/project-list-detail.component';
+import { RegisterComponent } from './screens/register/register.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { ProjectListDetailComponent } from './screens/project-list-detail/projec
     UserListComponent,
     ProjectEditComponent,
     ProjectListDetailComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,6 @@ import { ProjectListDetailComponent } from './screens/project-list-detail/projec
     HttpClientModule
   ],
   providers: [
-    AuthService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

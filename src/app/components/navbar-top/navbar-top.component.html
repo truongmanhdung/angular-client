@@ -56,7 +56,7 @@
         <!-- ============================================================== -->
         <!-- Profile -->
         <!-- ============================================================== -->
-        <li class="nav-item dropdown u-pro">
+        <li class="nav-item dropdown u-pro me-5">
           <div class="dropdown">
             <button
               class="btn dropdown-toggle"
@@ -67,16 +67,15 @@
             >
               <img
                 width="40"
-                src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.6435-9/119041444_307503740550551_8009155939658957269_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=R0x2B46_Z7MAX8wL5Am&tn=cwiumohlbfIyPqcu&_nc_ht=scontent.fhan2-2.fna&oh=00_AT_JRfIk6u8s8f2Nst1Dx5gD6AUbq2kcgyw8UxmpG1XRlw&oe=6213B116"
+                [src]="user.avatar"
                 alt="user"
                 class="rounded-circle me-3"
               />
-              <span class="hidden-md-down">Mạnh Dũng</span>
+              <span class="hidden-md-down">{{user.name}}</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" [routerLink]="['/profile']">Xem tài khoản</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/login']">Đăng nhập</a></li>
-              <li><a class="dropdown-item">Đăng xuất</a></li>
+              <li (click)="logout()"><a class="dropdown-item">Đăng xuất</a></li>
             </ul>
           </div>
         </li>

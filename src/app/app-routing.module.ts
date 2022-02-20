@@ -11,6 +11,7 @@ import { ProfileComponent } from './screens/profile/profile.component';
 import { ProjectAddComponent } from './screens/project-add/project-add.component';
 import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
 import { ProjectListComponent } from './screens/project-list/project-list.component';
+import { RegisterComponent } from './screens/register/register.component';
 import { UserListComponent } from './screens/user-list/user-list.component';
 
 
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'list-task',
