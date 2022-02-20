@@ -23,7 +23,18 @@ export class ListtaskComponent implements OnInit {
         that.loading = false
       }, 1000);
     })
-
-    
   }
+  remove(id: any) {
+    if(window.confirm("Bạn có muốn xóa không")){
+      let that = this
+      this.TaskApiService.deleteTask(id).subscribe((data) => {
+        console.log(data);
+        setTimeout(() => {
+          that.loading = false
+        }, 1000);
+      })
+      this.listTask = this.listTask.filter((item) => item._id !== id)
+    }
+  }
+
 }

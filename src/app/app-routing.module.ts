@@ -17,7 +17,7 @@ import { UserListComponent } from './screens/user-list/user-list.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dash-board',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -62,7 +62,7 @@ const routes: Routes = [
     component: ProjectAddComponent
   },
   {
-    path: 'admin/user',
+    path: 'member',
     component: UserListComponent
   }
 ];

@@ -1,31 +1,184 @@
 
-<h3 class="text-center fs-1">Edit Task</h3>
-<div class="" *ngIf="loading">
-    <app-loading></app-loading>
+<div style="position: fixed;
+z-index: 50;
+width: 100%;">
+    <app-navbar-top></app-navbar-top>
 </div>
-<div class="container">
-    <form *ngIf="!loading">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Tên công việc</label>
-          <input  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Mô tả công việc</label>
-          <input  type="text" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3">
-          <select class="form-select" aria-label="Default select example">
-            <option selected disabled>Project</option>
-            <option value="1">Project1</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <app-date-range-picker-overview-example></app-date-range-picker-overview-example>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Team Size</label>
-            <input  type="number" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button type="submit" class="btn btn-primary">Edit Task</button>
-      </form>
+<div style="position: fixed; top: 0; left: 0; bottom: 0;">
+    <app-navbar-left></app-navbar-left>
 </div>
+<div class="page-wrapper" style="padding-top: 100px;">
+  <div class="container">
+    <h3 class="my-3 text-center">Tạo công việc</h3>
+    <form #project="ngForm" (ngSubmit)="submitAddTaskForm(project)" novalidate>
+      <div class="col-6 offset-3">
+        <div class="form-group mt-3">
+          <label for="">Tên công việc</label>
+          <input
+            type="text"
+            ngModel
+            name="nameTask"
+            class="form-control"
+            #nameTask="ngModel"
+            [(ngModel)]="taskEdit.nameTask"
+          />
+          <span
+            class="text-danger"
+            *ngIf="nameTask?.invalid && (nameTask?.dirty || nameTask?.touched)"
+            >Tên không hợp lệ</span
+          >
+        </div>
+        <div class="form-group mt-3">
+          <label for="">Mô tả công việc</label>
+          <input
+            type="text"
+            ngModel
+            name="desc"
+            class="form-control"
+            #desc="ngModel"
+            [(ngModel)]="taskEdit.desc"
+          />
+          <span class="text-danger" *ngIf="desc?.invalid"
+            >Bạn phải nhập mô tả công việc</span
+          >
+        </div>
+        <div class="form-group mt-3">
+          <label for="">Ngày bắt đầu</label>
+          <input
+            type="date"
+            name="startDate"
+            ngModel
+            class="form-control"
+            #startDate="ngModel"
+            [(ngModel)]="taskEdit.startDate"
+          />
+          <span class="text-danger" *ngIf="startDate?.invalid"
+            >Bạn phải nhập ngày bắt đầu</span
+          >
+        </div>
+        <div class="mt-2">
+          <div class="d-flex align-items-center" *ngIf="watcher.length > 0 && !checkAss">
+            <p class="m-0"> Người thực hiện:</p>
+            <div class="user">
+              <img
+              src=""
+              width="20"
+              height="20"
+              [src]="watcher[0].userId.avatar"
+              class="rounded-circle"
+              alt=""
+            />
+              <span style="font-weight: bold" class="text-capitalize">
+                {{ watcher[0].userId.name }}
+              </span>
+              <i (click)="onRemoveAss()" class="fa-solid fa-circle-xmark"></i>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-2" *ngIf="watcher.length > 1 && !checkAss">
+            <p class="m-0 me-2">Người theo dõi: </p>
+            <div class="" *ngFor="let item of watcher, let i = index">
+              <div class="m-0 ms-2 user" *ngIf="i > 0">
+                <img
+                  src=""
+                  width="20"
+                  height="20"
+                  [src]="item.userId.avatar"
+                  class="rounded-circle"
+                  alt=""
+                />
+                <span style="font-weight: bold" class="text-capitalize">
+                  {{ item.userId.name }}
+                </span>
+                <i (click)="onRemoveWatcher(item.userId._id)" class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-2" *ngIf="watcher.length > 1 && checkAss">
+            <p class="m-0 me-2">Người theo dõi: </p>
+            <div class="" *ngFor="let item of watcher, let i = index">
+              <div class="m-0 ms-2 user">
+                <img
+                  src=""
+                  width="20"
+                  height="20"
+                  [src]="item.userId.avatar"
+                  class="rounded-circle"
+                  alt=""
+                />
+                <span style="font-weight: bold" class="text-capitalize">
+                  {{ item.userId.name }}
+                </span>
+                <i (click)="onRemoveWatcher(item.userId._id)" class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group list-abc mt-3">
+          <label for="">Thêm người thực hiện - theo dõi</label>
+          <input
+            (keyup)="filter($event)"
+            style="width: 300px"
+            placeholder="Tìm kiếm user"
+            type="search"
+            value="{{ search }}"
+            class="form-control ms-3"
+          />
+          <div class="search-key" *ngIf="search !== ''">
+            <ul class="list-group list-filter-user">
+              <li  class="list-group-item" *ngIf="listUserFilter.length === 0">
+                Không tìm thấy kết quả nào
+              </li>
+              <li
+                *ngFor="let item of listUserFilter"
+                (click)="onAddUser(item)"
+                class="list-group-item"
+                aria-current="true"
+              >
+                <img
+                  src=""
+                  width="20"
+                  height="20"
+                  [src]="item.avatar"
+                  class="rounded-circle"
+                  alt=""
+                />
+                <span style="font-weight: bold" class="text-capitalize">
+                  {{ item.name }} - {{ item.email }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="form-group mt-3">
+          <label for="">Project</label>
+          <div class="mb-3">
+            <select
+              class="form-select"
+              name="projectId"
+              ngModel
+              [(ngModel)]="taskEdit.projectId"
+              #projectId="ngModel"
+              ng-model="selected"
+            >
+              <option  *ngFor="let p of listProject"  [ngValue]="p._id" >
+                {{ p.projectName }}
+              </option>
+            </select>
+            
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            [disabled]="project.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Tạo
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

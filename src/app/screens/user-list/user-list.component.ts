@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
+  users: Array<any> = []
   constructor(private UserService: UserService) { }
   loading = true;
   ngOnInit(): void {
@@ -15,6 +16,7 @@ export class UserListComponent implements OnInit {
     this.UserService.getUsers().subscribe((data) => {
       console.log(data);
       setTimeout(() => {
+        that.users = data
         that.loading = false
       }, 1000);
     })
