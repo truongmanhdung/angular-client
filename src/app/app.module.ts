@@ -21,11 +21,13 @@ import { AuthGuard } from './guard/auth.guard';
 import { ProjectListComponent } from './screens/project-list/project-list.component';
 import { ProjectAddComponent } from './screens/project-add/project-add.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserListComponent } from './screens/user-list/user-list.component';
 import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
 import { ProjectListDetailComponent } from './screens/project-list-detail/project-list-detail.component';
 import { RegisterComponent } from './screens/register/register.component';
+import { AuthInterceptor } from './common/auth-interceptor';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { RegisterComponent } from './screens/register/register.component';
     HttpClientModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ]
   ],
   bootstrap: [AppComponent]
 })

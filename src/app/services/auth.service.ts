@@ -17,4 +17,9 @@ export class AuthService {
   register(data: any){
     return this.http.post<any>(`${environment.registerApiUrl}`, data);
   }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    return token
+  }
 }
