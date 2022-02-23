@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-user-list',
@@ -9,9 +10,16 @@ import { UserService } from '../../services/user.service';
 export class UserListComponent implements OnInit {
 
   users: Array<any> = []
-  constructor(private UserService: UserService) { }
+  constructor(private UserService: UserService, private AuthApiService: AuthApiService) { }
   loading = true;
+  isCheck = false
   ngOnInit(): void {
+    this.AuthApiService.getUserLocal().subscribe((res) => {
+      const {user} = res;
+      if(user.role === "admin"){
+        this.isCheck = true
+      }
+    })
     let that = this;
     this.UserService.getUsers().subscribe((data) => {
       console.log(data);

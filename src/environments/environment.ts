@@ -11,7 +11,7 @@ export const environment = {
   loginApiUrl: 'http://localhost:8080/api/signin',
   registerApiUrl: 'http://localhost:8080/api/signup',
   logoutApiUrl: 'http://localhost:8080/api/signout',
-  
+  userLocal: 'http://localhost:8080/api/current-user'
 };
 
 /*

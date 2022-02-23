@@ -3,7 +3,7 @@ export interface IPROJECT {
     projectName: String,
     project_money: number,
     startDate: Date,
-    teamSize: number,
+    member: any,
     updatedAt: String,
     createdAt: String,
     endDate: String

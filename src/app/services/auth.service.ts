@@ -3,11 +3,15 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor( private http: HttpClient) { }
   isAuthenticated(){
-    let token = localStorage.getItem('token');
-    if(token != undefined && token.length > 0){
-      return true;
+    let user:any = localStorage.getItem('user');
+    if(user){
+      user = JSON.parse(user);
     }
-    return false;
+    if(user.role === "admin"){
+      return true
+    }else{
+      return false;
+    }
   }
 
   login(data: any){

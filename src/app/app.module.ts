@@ -29,6 +29,7 @@ import { RegisterComponent } from './screens/register/register.component';
 import { AuthInterceptor } from './common/auth-interceptor';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

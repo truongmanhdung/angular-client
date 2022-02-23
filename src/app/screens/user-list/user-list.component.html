@@ -29,11 +29,11 @@
           </td>
           <td class="text-center" *ngIf="item.role === 'admin'">
               <button type="button" disabled class="btn btn-outline-primary me-2">Admin</button>
-              <button type="button" (click)="removeAdmin(item._id)" class="btn btn-outline-danger">Remove Admin</button>
+              <button *ngIf="isCheck" type="button" (click)="removeAdmin(item._id)" class="btn btn-outline-danger">Remove Admin</button>
           </td>
           <td class="text-center" *ngIf="item.role !== 'admin'">
             <button type="button" disabled class="btn btn-outline-primary me-2">Member</button>
-            <button type="button" (click)="updateAdmin(item._id)" class="btn btn-outline-danger">Update Admin</button>
+            <button *ngIf="isCheck" type="button" (click)="updateAdmin(item._id)" class="btn btn-outline-danger">Update Admin</button>
         </td>
         </tr>
       </tbody>

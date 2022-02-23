@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IPROJECT } from 'src/app/module/project';
 import { ProjectApiService } from 'src/app/services/project-api.service';
+import { AuthApiService } from '../../services/auth-api.service';
 
 
 @Component({
@@ -12,11 +13,16 @@ import { ProjectApiService } from 'src/app/services/project-api.service';
 export class ProjectListComponent implements OnInit {
 
   projects: IPROJECT[] = []
-  constructor(private ProjectApiService: ProjectApiService) { }
+  constructor(private ProjectApiService: ProjectApiService, private AuthApiService: AuthApiService) { }
   loading = true;
-  apiUrl = "http://localhost:8080/api/projects"
-  apiDelete = "http://localhost:8080/api/project"
+  isCheck = false
   ngOnInit(): void {
+    this.AuthApiService.getUserLocal().subscribe((res) => {
+      const {user} = res;
+      if(user.role === "admin"){
+        this.isCheck = true
+      }
+    })
     let that = this
     this.ProjectApiService.getProject().subscribe((data) => {
       console.log(data);

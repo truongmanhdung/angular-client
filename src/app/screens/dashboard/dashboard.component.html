@@ -21,12 +21,31 @@
             </div>
           </div>
           
-          <div class="row">
+          <div class="row" *ngIf="!isCheck">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <a [routerLink]="['/du-an']" class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Tổng dự án</h5>
+                  <p class="card-text">{{listProject.length}} dự án</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Tổng số công việc đang làm và đang theo dõi</h5>
+                  <p class="card-text">{{listTask.length}} dự án</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="isCheck">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
               <a [routerLink]="['/du-an']" class="card">
                 <div class="card-body">
                   <h5 class="card-title">Số lượng dự án</h5>
-                  <p class="card-text">{{listTask.length}} dự án</p>
+                  <p class="card-text">{{listProject.length}} dự án</p>
                 </div>
               </a>
             </div>
@@ -56,7 +75,7 @@
             </div>
           </div>
           
-          <div class="row">
+          <div class="row" *ngIf="isCheck">
             <!-- Column -->
             <div class="col-lg-8 d-flex align-items-stretch">
               <div class="card w-100">
@@ -141,9 +160,7 @@
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
-        <footer class="footer">
-          © 2021 Adminwrap by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-        </footer>
+     
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->

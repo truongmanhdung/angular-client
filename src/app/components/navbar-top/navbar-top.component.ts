@@ -18,8 +18,6 @@ export class NavbarTopComponent implements OnInit {
     }else{
       this.router.navigate(['/login'])
     }
-    
-    
   }
 
   logout(){
@@ -28,7 +26,8 @@ export class NavbarTopComponent implements OnInit {
       
       if(res.success){
         this.router.navigate(['/login'])
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
+        localStorage.removeItem('token')
       }
     })
   }

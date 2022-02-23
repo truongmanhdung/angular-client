@@ -11,7 +11,12 @@ import { AuthApiService } from 'src/app/services/auth-api.service';
 export class LoginComponent implements OnInit {
   constructor(private router: Router, private AuthApiService: AuthApiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.AuthApiService.getUserLocal().subscribe((res) => {
+      console.log(res);
+      
+    })
+  }
   submitLoginForm(f: NgForm) {
     console.log(f.value);
     this.AuthApiService.login(f.value).subscribe((res) => {

@@ -27,4 +27,8 @@ export class AuthApiService {
   logout(){
     return this.http.get<any>(`${environment.logoutApiUrl}`);
   }
+
+  getUserLocal(){
+    return this.http.get<any>(`${environment.userLocal}`);
+  }
 }

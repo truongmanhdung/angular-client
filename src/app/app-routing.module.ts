@@ -40,11 +40,13 @@ const routes: Routes = [
   },
   {
     path: 'create-task',
-    component: TaskcreateComponent
+    component: TaskcreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit-task/:id',
-    component: TaskeditComponent
+    component: TaskeditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
@@ -61,10 +63,12 @@ const routes: Routes = [
   {
     path: 'du-an/edit/:id',
     component: ProjectEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'du-an/them-moi',
-    component: ProjectAddComponent
+    component: ProjectAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'member',

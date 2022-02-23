@@ -7,7 +7,7 @@
         <app-navbar-left></app-navbar-left>
     </div>
     <div class="page-wrapper" style="padding-top: 100px;">
-      <a [routerLink]="['/create-task']"
+      <a *ngIf="isCheck" [routerLink]="['/create-task']"
       ><button type="button" class="btn btn-outline-primary ms-4">
         Thêm công việc
       </button></a
@@ -26,7 +26,7 @@
           <th class="text-center">Tên Project</th>
           <th class="text-center">Người thực hiện</th>
           <th class="text-center">Người theo dõi</th>
-          <th class="text-center">Actions</th>
+          <th *ngIf="isCheck" class="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -71,7 +71,7 @@
               </div>
             </div>
           </td>
-          <td class="text-center">
+          <td class="text-center" *ngIf="isCheck">
             <a [routerLink]="['/edit-task', item._id]"
               ><button type="button" class="btn btn-outline-primary">Sửa</button></a
             >

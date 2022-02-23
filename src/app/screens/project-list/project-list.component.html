@@ -10,7 +10,7 @@
     </div>
     <div class="page-wrapper" style="padding-top: 100px;">
       <div class="container">
-        <a [routerLink]="['/du-an/them-moi']"
+        <a *ngIf="isCheck" [routerLink]="['/du-an/them-moi']"
           ><button type="button" class="btn btn-outline-primary ms-4">
             Thêm dự án
           </button></a
@@ -27,7 +27,7 @@
               <th class="text-center">Date of Start</th>
               <th class="text-center">Team Size</th>
               <th class="text-center">Tổng tiền dự án</th>
-              <th class="text-center">Actions</th>
+              <th class="text-center" *ngIf="isCheck">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -35,9 +35,9 @@
               <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center">{{ pr.projectName }}</td>
               <td class="text-center">{{ pr.startDate | date:'d/M/y' }}</td>
-              <td class="text-center">{{ pr.teamSize }}</td>
+              <td class="text-center">{{ pr.member.length}}</td>
               <td class="text-center">{{ pr.project_money | currency: "VND" }}</td>
-              <td class="text-center">
+              <td class="text-center" *ngIf="isCheck">
                 <a
                   [routerLink]="['/du-an/edit/', pr._id]"
                   class="btn btn-outline-primary me-2"
