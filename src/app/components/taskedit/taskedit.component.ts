@@ -22,77 +22,82 @@ export class TaskeditComponent implements OnInit {
     
   listUser: Array<any> = [];
   listProject: Array<any> = [];
-  listUserFilter: Array<any> = [];
-  watcher: Array<any> = [];
-  taskEdit: any = {}
+  performer: any = {};
+  projectData: any = {};
+  listUserFilter: any = [];
+  listProjectFilter: any = [];
+  taskEdit: any = {};
   ngOnInit(): void {
 
     const id = this.route.snapshot.paramMap.get('id');
     if(id){
       this.TaskApiService.getOneTask(id).subscribe((data) => {
         console.log(data);
-        
-        this.taskEdit =  data.task
-        this.watcher = data.task.watcher
+        this.taskEdit =  data.task;
+        this.projectData = data.task.projectId;
+        this.performer = data.task.performer;
+        this.ProjectApiService.getOneProject(data.task.projectId._id).subscribe((res) => {
+          console.log(res);
+          
+          this.listProjectFilter = res.project.member;
+          this.listUser = res.project.member;
+        });
       })
     }
-
-    this.UserService.getUsers().subscribe((data) => {
-      this.listUser = data;
-      this.listUserFilter = data
-    });
     this.ProjectApiService.getProject().subscribe((data) => {
       this.listProject = data.Projects;
+      this.listProjectFilter = data.Projects;
     });
   }
-  checkAss = false;
   search = '';
-  onAddUser(user: any) {
-    if (this.checkAss) {
-      this.watcher.unshift({
-        userId: user
-      });
-      this.checkAss = false;
-    } else {
-      this.watcher.push({ userId: user });
+  searchProject = ''
+  filter(e: any) {
+    this.search = e.target.value;
+    if (e.target.value !== '') {
+      this.listUserFilter =  this.listUser.filter((item: any) => item.userId.name.toLowerCase().includes(e.target.value.toLowerCase()));
     }
-    this.search = '';
+  }
+
+  filterProject(e: any){
+    this.searchProject = e.target.value;
+    if (e.target.value !== '') {
+      this.listProjectFilter = this.listProject.filter((project: any) =>
+        project.projectName.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+    }
   }
 
   onRemoveAss() {
-    this.watcher.shift();
-    this.checkAss = true
+    this.performer = {};
   }
 
-  onRemoveWatcher(id: String) {
-    this.watcher = this.watcher.filter((item) => item.userId._id !== id)
+  onAddUser(user: any) {
+    this.performer = user.userId
+    console.log(user);
+    this.search = '';
   }
-  filter(e: any) {
-    this.watcher.forEach((item) => {
-      this.listUser = this.listUser.filter(
-        (user: any) => user._id !== item.userId._id
-      );
-    });
-    this.search = e.target.value;
-    if (e.target.value !== '') {
-      this.listUserFilter = this.listUser.filter((user: any) =>
-        user.name.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-    }
+
+  onAddProject(data: any){
+    this.projectData = data;
+    this.listUser = data.member;
+    this.listUserFilter = data.member
+    this.searchProject = ''
+  }
+
+  onRemoveProject(){
+    this.projectData = {}
+    this.listUser = []
+    this.searchProject = ''
+    this.search = ''
   }
 
   submitAddTaskForm(f: NgForm) {
-    const watcherId: any = [];
-    this.watcher.forEach((item) => {
-      watcherId.push({
-        userId: item.userId._id,
-      });
-    });
+   
     const task = {
         nameTask: f.value.nameTask,
         desc: f.value.desc,
-        projectId: f.value.projectId,
-        watcher: watcherId,
+        projectId: this.projectData._id,
+        performer: this.performer._id,
         startDate: f.value.startDate,
     }
     console.log('====================================');

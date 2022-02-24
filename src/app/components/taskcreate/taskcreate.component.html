@@ -26,6 +26,100 @@
                 >Tên không hợp lệ</span
               >
             </div>
+            <div class="mt-2" *ngIf="projectData.projectName">
+              <div class="d-flex align-items-center">
+                <p class="m-0"> Tên dự án:</p>
+                <div class="user">
+                  <span style="font-weight: bold" class="text-capitalize">
+                    {{ projectData.projectName }}
+                  </span>
+                  <i (click)="onRemoveProject()" class="fa-solid fa-circle-xmark"></i>
+                </div>
+              </div>
+            </div>
+            <div class="form-group list-abc mt-3" *ngIf="!projectData.projectName">
+              <label for="">Thêm dự án</label>
+              <input
+                (keyup)="filterProject($event)"
+                style="width: 300px"
+                placeholder="Tìm kiếm dự án"
+                type="search"
+                value="{{ searchProject }}"
+                class="form-control ms-3"
+              />
+              <div class="search-key" *ngIf="searchProject !== ''">
+                <ul class="list-group list-filter-user">
+                  <li  class="list-group-item" *ngIf="listProjectFilter.length === 0">
+                    Không tìm thấy kết quả nào
+                  </li>
+                  <li
+                    *ngFor="let item of listProjectFilter"
+                    (click)="onAddProject(item)"
+                    class="list-group-item"
+                    aria-current="true"
+                  >
+                    <span style="font-weight: bold" class="text-capitalize">
+                      {{ item.projectName }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="performer.userId">
+              <div class="d-flex align-items-center" >
+                <p class="m-0"> Người thực hiện:</p>
+                <div class="user">
+                  <img
+                  src=""
+                  width="20"
+                  height="20"
+                  [src]="performer.userId.avatar"
+                  class="rounded-circle"
+                  alt=""
+                />
+                  <span style="font-weight: bold" class="text-capitalize">
+                    {{ performer.userId.name }}
+                  </span>
+                  <i (click)="onRemoveAss()" class="fa-solid fa-circle-xmark"></i>
+                </div>
+              </div>
+            </div>
+            <div class="form-group list-abc mt-3" *ngIf="listUser.length > 0 &&  !performer.userId">
+              <label for="">Thêm người thực hiện</label>
+              <input
+                (keyup)="filter($event)"
+                style="width: 300px"
+                placeholder="Tìm kiếm user"
+                type="search"
+                value="{{ search }}"
+                class="form-control ms-3"
+              />
+              <div class="search-key" *ngIf="search !== ''">
+                <ul class="list-group list-filter-user">
+                  <li  class="list-group-item" *ngIf="listUserFilter.length === 0">
+                    Không tìm thấy kết quả nào
+                  </li>
+                  <li
+                    *ngFor="let item of listUserFilter"
+                    (click)="onAddUser(item)"
+                    class="list-group-item"
+                    aria-current="true"
+                  >
+                    <img
+                      src=""
+                      width="20"
+                      height="20"
+                      [src]="item.userId.avatar"
+                      class="rounded-circle"
+                      alt=""
+                    />
+                    <span style="font-weight: bold" class="text-capitalize">
+                      {{ item.userId.name }} - {{ item.userId.email }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="form-group mt-3">
               <label for="">Mô tả công việc</label>
               <input
@@ -52,115 +146,9 @@
                 >Bạn phải nhập ngày bắt đầu</span
               >
             </div>
-            <div class="mt-2">
-              <div class="d-flex align-items-center" *ngIf="watcher.length > 0 && !checkAss">
-                <p class="m-0"> Người thực hiện:</p>
-                <div class="user">
-                  <img
-                  src=""
-                  width="20"
-                  height="20"
-                  [src]="watcher[0].userId.avatar"
-                  class="rounded-circle"
-                  alt=""
-                />
-                  <span style="font-weight: bold" class="text-capitalize">
-                    {{ watcher[0].userId.name }}
-                  </span>
-                  <i (click)="onRemoveAss()" class="fa-solid fa-circle-xmark"></i>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mt-2" *ngIf="watcher.length > 1 && !checkAss">
-                <p class="m-0 me-2">Người theo dõi: </p>
-                <div class="" *ngFor="let item of watcher, let i = index">
-                  <div class="m-0 ms-2 user" *ngIf="i > 0">
-                    <img
-                      src=""
-                      width="20"
-                      height="20"
-                      [src]="item.userId.avatar"
-                      class="rounded-circle"
-                      alt=""
-                    />
-                    <span style="font-weight: bold" class="text-capitalize">
-                      {{ item.userId.name }}
-                    </span>
-                    <i (click)="onRemoveWatcher(item.userId._id)" class="fa-solid fa-circle-xmark"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mt-2" *ngIf="watcher.length > 1 && checkAss">
-                <p class="m-0 me-2">Người theo dõi: </p>
-                <div class="" *ngFor="let item of watcher, let i = index">
-                  <div class="m-0 ms-2 user">
-                    <img
-                      src=""
-                      width="20"
-                      height="20"
-                      [src]="item.userId.avatar"
-                      class="rounded-circle"
-                      alt=""
-                    />
-                    <span style="font-weight: bold" class="text-capitalize">
-                      {{ item.userId.name }}
-                    </span>
-                    <i (click)="onRemoveWatcher(item.userId._id)" class="fa-solid fa-circle-xmark"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group list-abc mt-3">
-              <label for="">Thêm người thực hiện - theo dõi</label>
-              <input
-                (keyup)="filter($event)"
-                style="width: 300px"
-                placeholder="Tìm kiếm user"
-                type="search"
-                value="{{ search }}"
-                class="form-control ms-3"
-              />
-              <div class="search-key" *ngIf="search !== ''">
-                <ul class="list-group list-filter-user">
-                  <li  class="list-group-item" *ngIf="listUserFilter.length === 0">
-                    Không tìm thấy kết quả nào
-                  </li>
-                  <li
-                    *ngFor="let item of listUserFilter"
-                    (click)="onAddUser(item)"
-                    class="list-group-item"
-                    aria-current="true"
-                  >
-                    <img
-                      src=""
-                      width="20"
-                      height="20"
-                      [src]="item.avatar"
-                      class="rounded-circle"
-                      alt=""
-                    />
-                    <span style="font-weight: bold" class="text-capitalize">
-                      {{ item.name }} - {{ item.email }}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            
       
-            <div class="form-group mt-3">
-              <label for="">Project</label>
-              <div class="mb-3">
-                <select
-                  class="form-select"
-                  name="projectId"
-                  ngModel
-                  #projectId="ngModel"
-                >
-                  <option *ngFor="let p of listProject" [value]="p._id">
-                    {{ p.projectName }}
-                  </option>
-                </select>
-              </div>
-            </div>
+            
             <div class="d-flex justify-content-end mt-3">
               <button
                 [disabled]="project.invalid"

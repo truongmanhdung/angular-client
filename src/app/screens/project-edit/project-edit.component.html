@@ -28,11 +28,68 @@
                 <input [(ngModel)]="projectEdit.project_money" type="number" name="project_money" ngModel class="form-control" #project_money="ngModel" >
                 <span class="text-danger" *ngIf="project_money?.invalid">Bạn phải nhập số lượng thành viên</span>
             </div>
-            <div class="form-group mt-3">
-                <label for="">Số thành viên</label>
-                <input [(ngModel)]="projectEdit.teamSize" type="number" name="teamSize" ngModel class="form-control" #teamSize="ngModel" >
-                <span class="text-danger" *ngIf="teamSize?.invalid">Bạn phải nhập số lượng thành viên</span>
-            </div>
+            <div class="d-flex mt-2" *ngIf="members.length > 0">
+                <div class="" style="width: 130px;">
+                  <p class="m-0 me-2 d-block" >Thành viên dự án:</p>
+                </div>
+                <div class="d-flex" style="flex-wrap: wrap">
+                  <div class="mb-2" *ngFor="let item of members; let i = index">
+                    <div class="m-0 ms-2 user">
+                      <img
+                        src=""
+                        width="20"
+                        height="20"
+                        [src]="item.userId.avatar"
+                        class="rounded-circle"
+                        alt=""
+                      />
+                      <span style="font-weight: bold" class="text-capitalize">
+                        {{ item.userId.name }}
+                      </span>
+                      <i
+                        (click)="onRemoveMembers(item.userId._id)"
+                        class="fa-solid fa-circle-xmark"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group list-abc mt-3">
+                <label for="">Thêm thành viên dự án</label>
+                <input
+                  (keyup)="filter($event)"
+                  style="width: 300px"
+                  placeholder="Tìm kiếm user"
+                  type="search"
+                  value="{{ search }}"
+                  class="form-control ms-3"
+                />
+                <div class="search-key" *ngIf="search !== ''">
+                  <ul class="list-group list-filter-user">
+                    <li class="list-group-item" *ngIf="listUserFilter.length === 0">
+                      Không tìm thấy kết quả nào
+                    </li>
+                    <li
+                      *ngFor="let item of listUserFilter"
+                      (click)="onAddUser(item)"
+                      class="list-group-item"
+                      aria-current="true"
+                    >
+                      <img
+                        src=""
+                        width="20"
+                        height="20"
+                        [src]="item.avatar"
+                        class="rounded-circle"
+                        alt=""
+                      />
+                      <span style="font-weight: bold" class="text-capitalize">
+                        {{ item.name }} - {{ item.email }}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             <div class="d-flex justify-content-end mt-3"> 
                 <button [disabled]="project.invalid" type="submit" class="btn btn-primary">Sửa</button>
             </div>

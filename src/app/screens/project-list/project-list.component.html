@@ -39,6 +39,11 @@
               <td class="text-center">{{ pr.project_money | currency: "VND" }}</td>
               <td class="text-center" *ngIf="isCheck">
                 <a
+                  [routerLink]="['/du-an/chi-tiet/', pr._id]"
+                  class="btn btn-outline-success me-2"
+                  >Chi tiết</a
+                >
+                <a
                   [routerLink]="['/du-an/edit/', pr._id]"
                   class="btn btn-outline-primary me-2"
                   >Sửa</a

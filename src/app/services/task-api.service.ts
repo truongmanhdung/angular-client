@@ -30,4 +30,8 @@ export class TaskApiService {
   deleteTask(id: String): Observable<any> {
     return this.http.delete<any>(`${environment.taskApiUrl}${id}`);
   }
+
+  updateStatus(id: String, data: any): Observable<any> {
+    return this.http.patch<any>(`${environment.taskApiUrl}${id}`, data);
+  }
 }

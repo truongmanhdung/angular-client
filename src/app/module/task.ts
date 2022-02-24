@@ -2,7 +2,8 @@ export interface TASK {
   _id: number,
   nameTask: String,
   timeStart: Date,
-  watcher: any,
+  performer: any,
+  status: String,
   projectId: any,
   desc: String
 }

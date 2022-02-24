@@ -10,6 +10,7 @@ import { LoginComponent } from './screens/login/login.component';
 import { ProfileComponent } from './screens/profile/profile.component';
 import { ProjectAddComponent } from './screens/project-add/project-add.component';
 import { ProjectEditComponent } from './screens/project-edit/project-edit.component';
+import { ProjectListDetailComponent } from './screens/project-list-detail/project-list-detail.component';
 import { ProjectListComponent } from './screens/project-list/project-list.component';
 import { RegisterComponent } from './screens/register/register.component';
 import { UserListComponent } from './screens/user-list/user-list.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
     component: DashboardComponent,
     // canActivate: [AuthGuard]
   },
+
   {
     path: 'login',
     component: LoginComponent,
@@ -37,6 +39,10 @@ const routes: Routes = [
   {
     path: 'list-task',
     component: ListtaskComponent
+  },
+  {
+    path: 'du-an/chi-tiet/:id',
+    component: ProjectListDetailComponent
   },
   {
     path: 'create-task',

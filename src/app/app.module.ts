@@ -7,7 +7,7 @@ import { LoginComponent } from './screens/login/login.component';
 import { DashboardComponent } from './screens/dashboard/dashboard.component';
 import { ListtaskComponent } from './screens/listtask/listtask.component';
 import { NavbarLeftComponent } from './components/navbar-left/navbar-left.component';
-import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskeditComponent } from './components/taskedit/taskedit.component';
 import { TaskcreateComponent } from './components/taskcreate/taskcreate.component';
@@ -27,6 +27,7 @@ import { ProjectEditComponent } from './screens/project-edit/project-edit.compon
 import { ProjectListDetailComponent } from './screens/project-list-detail/project-list-detail.component';
 import { RegisterComponent } from './screens/register/register.component';
 import { AuthInterceptor } from './common/auth-interceptor';
+import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
 
 
 
