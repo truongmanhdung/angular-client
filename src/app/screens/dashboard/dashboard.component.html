@@ -96,10 +96,10 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of listTask">
-                          <td style="width: 50px"><span class="round"><img width="100%" [src]="item.performer.userId.avatar" alt=""></span></td>
+                          <td style="width: 50px"><span class="round"><img width="100%" [src]="item.performer.avatar" alt=""></span></td>
                           <td>
-                            <h3 class="m-0">{{item.performer.userId.name}}</h3>
-                            <small class="text-muted">{{item.performer.userId.email}}</small>
+                            <h3 class="m-0">{{item.performer.name}}</h3>
+                            <small class="text-muted">{{item.performer.email}}</small>
                           </td>
                           <td>{{item.nameTask}}</td>
                           <td>{{item.projectId.projectName}}</td>
